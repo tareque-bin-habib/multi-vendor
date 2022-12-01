@@ -1,0 +1,10 @@
+.form-container {
+    width: 500px;
+    height: 600px;
+    border: 2px solid grey;
+    margin: 80px auto;
+}
+
+.form-title {
+    color: orange;
+}
