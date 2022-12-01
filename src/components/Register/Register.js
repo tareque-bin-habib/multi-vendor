@@ -1,13 +1,17 @@
 import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/UserContext';
+import { FaGoogle, FaFacebook, FaTwitter } from "react-icons/fa";
+
 import './Register.css'
+import { GoogleAuthProvider } from 'firebase/auth';
 
 const Register = () => {
     const [error, setError] = useState(null)
-    const { createUserWithEmail } = useContext(AuthContext)
+    const { createUserWithEmail, google } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -29,6 +33,18 @@ const Register = () => {
                 form.reset();
             })
             .catch(error => console.error(error))
+    }
+
+    const handleGoogle = () => {
+        const provider = new GoogleAuthProvider();
+        google(provider)
+            .then(result => {
+                const user = result.user;
+                console.log(user)
+                navigate('/')
+            })
+            .catch(error => console.error(error))
+
     }
 
     return (
@@ -59,6 +75,11 @@ const Register = () => {
                     </Form.Text>
                 </div>
             </Form>
+            <div className='d-flex justify-content-center mt-3'>
+                <button onClick={handleGoogle} className='me-3 google'><FaGoogle></FaGoogle></button>
+                <button className='me-3 facebook'><FaFacebook></FaFacebook></button>
+                <button className='me-3 twitter'><FaTwitter></FaTwitter></button>
+            </div>
         </div>
     );
 };
