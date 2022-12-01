@@ -1,3 +1,16 @@
 .vendor {
     color: orange;
 }
+
+.menu a {
+    text-decoration: none;
+    color: black;
+    font-size: 19px;
+    font-weight: bold;
+    margin-right: 50px;
+}
+
+.menu a:hover {
+    border-bottom: 2px solid orange;
+    color: orange;
+}
